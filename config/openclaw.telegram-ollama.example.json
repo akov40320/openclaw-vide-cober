@@ -1,0 +1,72 @@
+{
+  "gateway": {
+    "port": 18789,
+    "bind": "127.0.0.1"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M",
+        "fallbacks": []
+      },
+      "models": {
+        "ollama/hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M": {
+          "params": {
+            "temperature": 0.4,
+            "maxTokens": 1024
+          }
+        }
+      },
+      "workspace": "~/.openclaw/workspace"
+    }
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434",
+        "api": "ollama",
+        "apiKey": {
+          "source": "env",
+          "provider": "default",
+          "id": "OLLAMA_API_KEY"
+        },
+        "timeoutSeconds": 300,
+        "models": [
+          {
+            "id": "hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M",
+            "name": "hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M",
+            "input": ["text"],
+            "contextWindow": 32768,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "groupPolicy": "allowlist",
+      "groupAllowFrom": [],
+      "botToken": {
+        "source": "env",
+        "provider": "default",
+        "id": "TELEGRAM_BOT_TOKEN"
+      },
+      "streaming": {
+        "mode": "partial"
+      }
+    }
+  },
+  "plugins": {
+    "bundledDiscovery": "compat",
+    "allow": ["telegram", "ollama", "memory-core"],
+    "entries": {
+      "telegram": { "enabled": true, "config": {} },
+      "ollama": { "enabled": true, "config": {} },
+      "memory-core": { "enabled": true, "config": {} }
+    }
+  }
+}

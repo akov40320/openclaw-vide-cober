@@ -1,0 +1,18 @@
+services:
+  openclaw:
+    build: .
+    container_name: openclaw-vide-cober
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      OPENCLAW_STATE_DIR: /data/openclaw
+      OPENCLAW_CONFIG_PATH: /data/openclaw/openclaw.json
+      OLLAMA_HOST: http://host.docker.internal:11434
+    ports:
+      - "18789:18789"
+    volumes:
+      - ./openclaw-data:/data/openclaw
+      - ./SOUL.md:/data/openclaw/workspace/SOUL.md:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
