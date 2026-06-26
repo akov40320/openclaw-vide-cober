@@ -1,54 +1,56 @@
-# OpenClaw Telegram AI Assistant
+# OpenClaw Telegram AI-ассистент
 
-Test task implementation: OpenClaw Gateway connected to Telegram bot `@vide_cober_bot` and a local Ollama model.
+Реализация тестового задания: локально поднят OpenClaw Gateway, подключен Telegram-бот `@vide_cober_bot`, ответы генерируются через локальную модель Ollama.
 
-## What Was Done
+## Что сделано
 
-- Installed Node.js 24.16.0 and OpenClaw 2026.6.10 globally via npm.
-- Configured OpenClaw Gateway on `http://127.0.0.1:18789/`.
-- Connected Telegram bot `@vide_cober_bot` through `channels.telegram`.
-- Configured local Ollama model `hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M`.
-- Added custom `SOUL.md` for assistant tone, safety rules, and response style.
-- Added Docker setup as a bonus path.
+- Установлены Node.js 24.16.0 и OpenClaw 2026.6.10.
+- Настроен локальный OpenClaw Gateway: `http://127.0.0.1:18789/`.
+- Подключен Telegram-бот `@vide_cober_bot` через `channels.telegram`.
+- Настроена локальная Ollama-модель `hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M`.
+- Добавлен кастомный `SOUL.md` с тоном, стилем и ограничениями ассистента.
+- Добавлен Docker Compose как бонусный вариант запуска.
 
-## Local Run
+## Локальный запуск
 
 ```powershell
 npm install -g openclaw
 ollama list
-$env:TELEGRAM_BOT_TOKEN="replace_me"
+$env:TELEGRAM_BOT_TOKEN="заменить_на_токен_бота"
 $env:OLLAMA_API_KEY="ollama-local"
 openclaw gateway run --force
 ```
 
-Then open the dashboard:
+После запуска откройте панель Gateway:
 
 ```text
 http://127.0.0.1:18789/
 ```
 
-## Checks
+## Проверка
 
 ```powershell
 openclaw --version
 openclaw config validate
 openclaw status
 openclaw channels status --probe
-openclaw infer model run --local --model "ollama/hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M" --prompt "Reply with exactly: pong" --json
+openclaw infer model run --local --model "ollama/hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M" --prompt "Ответь ровно: pong" --json
 ```
 
-## Docker Bonus
+В `openclaw channels status --probe` должно быть видно, что Gateway доступен, Telegram подключен, бот `@vide_cober_bot` работает в режиме polling.
+
+## Docker-бонус
 
 ```powershell
 Copy-Item .env.example .env
-# Fill TELEGRAM_BOT_TOKEN in .env
+# Заполните TELEGRAM_BOT_TOKEN в .env
 docker compose up --build
 ```
 
-The compose file mounts `SOUL.md`, exposes port `18789`, and connects the container to host Ollama via `host.docker.internal:11434`.
+Compose-файл монтирует `SOUL.md`, открывает порт `18789` и подключает контейнер к Ollama на хосте через `host.docker.internal:11434`.
 
-## Submission
+## Формат сдачи
 
-- Telegram bot: `@vide_cober_bot`
-- Gateway: must stay running on the local machine while the bot is being checked.
-- Screencast: upload the recorded video to Google Drive and submit the share link.
+- Telegram-бот: `@vide_cober_bot`
+- Gateway должен быть запущен на локальной машине во время проверки бота.
+- Скринкаст нужно загрузить на Google Drive или приложить доступную ссылку на видео.

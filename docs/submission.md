@@ -1,12 +1,12 @@
-# Submission Text
+# Текст для сдачи
 
-Telegram bot: `@vide_cober_bot`
+Telegram-бот: `@vide_cober_bot`
 
-GitHub repository: https://github.com/akov40320/openclaw-vide-cober
+GitHub-репозиторий: https://github.com/akov40320/openclaw-vide-cober
 
-Screencast:
-- GitHub Release asset: https://github.com/akov40320/openclaw-vide-cober/releases/tag/screencast-v1
-- Local file: `C:\Users\yasha\Documents\тз_вайбокед\screencast-openclaw-vide-cober.mp4`
-- Google Drive link: TODO - upload the local MP4 to Google Drive if the reviewer strictly requires Drive-hosted video.
+Скринкаст:
+- Актуальный локальный файл: `C:\Users\yasha\Documents\тз_вайбокед\screencast-openclaw-vide-cober-polished-ru.mp4`
+- Резервная ссылка на GitHub Release: https://github.com/akov40320/openclaw-vide-cober/releases/tag/screencast-v1
+- Если строго нужна ссылка Google Drive, загрузить локальный MP4 в Drive и вставить ссылку сюда.
 
-I used OpenClaw 2026.6.10 on Node.js 24.16.0 with a local Ollama model, so the assistant works without paid API keys. Telegram is connected through `channels.telegram`, and Gateway is running locally on `http://127.0.0.1:18789/`. The main difficulty was updating an older OpenClaw config: the Ollama plugin had to be added to the plugin allowlist, the exact Ollama model id had to match `ollama list`, and the Telegram offset had to be reset after switching bot tokens. I also added a custom `SOUL.md` and a Docker Compose setup as bonus items. Total hands-on setup and debugging time was about 2-3 hours.
+Я использовал OpenClaw 2026.6.10 на Node.js 24.16.0 и локальную модель Ollama, поэтому ассистент работает без платных API-ключей. Telegram подключен через `channels.telegram`, Gateway запущен локально на `http://127.0.0.1:18789/`. Основная сложность была в обновлении старого локального конфига OpenClaw: нужно было добавить Ollama в allowlist плагинов, указать точный id модели из `ollama list` и сбросить старый Telegram offset после смены токена бота. Также добавлены бонусы: кастомный `SOUL.md` и Docker Compose. На настройку, проверку и отладку ушло примерно 2-3 часа.
